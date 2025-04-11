@@ -1,0 +1,65 @@
+#buypage {
+    display: flex;
+    width: 1000px;
+    margin: 100px auto 0;
+    font-size: 25px;
+}
+#buymenu {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#buymenu p { margin:10%; }
+#imgsrc {
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#imgcl{ display: flex; }
+#imgcl div {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.bselect { width: 20px; height: 20px; border: 1px solid black; background-color: black; cursor: pointer;}
+.wselect { width: 20px; height: 20px; border: 1px solid black; background-color: white; cursor: pointer;}
+#buyimg { width: 240px; height: 300px; margin-bottom: 30px; }
+div li {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+#btn {
+    margin: 3%;
+    display: flex;
+    justify-content: space-evenly;
+}
+#btnsz {
+    margin: 5%;
+    width: 200px;
+    height: 60px;
+    font-size: 18px;
+}
+#buyoption { width: 50%; }
+#buyoption > h2 { padding: 5% 0; border-bottom: 1px solid #000; }
+#buyoption > ul > li { padding: 15px 0; }
+#buyoption > ul > li:nth-child(5) { padding: 10px 0; }
+#buyoption > ul > li:nth-child(6) { border-bottom: 1px solid #000; }
+#color, #rank, #memory { width: 150px; font-size: 20px; }
+#buyoption > ul > li p a { display: flex; justify-content: space-between; }
+#btncl {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+}
+#btnpm { font-size: 20px; }
+#before { text-decoration-line: line-through; }
+#after { text-decoration-line: underline; }
+#cnt { font-size: 20px; width: 40px; }
+#total { font-size: 20px; vertical-align: top; }
+#totalhidden { display: none; }
+#totalhidden > li { margin-top: 20px; }

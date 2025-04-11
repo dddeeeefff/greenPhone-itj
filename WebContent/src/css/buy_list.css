@@ -1,0 +1,19 @@
+
+.main {
+
+	font-size: 20px;
+}
+
+
+#list tr { height:70px; }
+#list th, #list td { padding:8px 3px; }
+#list th { 	border-top:2px solid #0e9482;
+	background:#d6f1ed;}
+#list td {
+
+	text-align: center;
+	border-bottom:1px solid #f9f9f9;
+}
+#list tr:nth-child(even){ background:#f9f9f9; }
+
+.page{ text-align:center; margin-top: 30px; }

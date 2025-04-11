@@ -1,0 +1,78 @@
+.main {
+    width: 100%;
+    height: 100%;
+    padding: 50px 100px;
+}
+.form_table form { margin:0; }
+.form_table td,table,input {
+	font-size: 20px; 
+	color: #666; 
+	line-height: 150%; 
+}
+.form_table{
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0px;
+	border-top: 3px solid #0e9482;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.form_table th{
+	color: #222;
+	font-weight: normal;
+	text-align: center;
+	padding: 15px;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -0.5pt;
+	background: #f9f9f9;
+	font-weight: 600;
+}
+
+.form_table tr {
+	height: 100px;
+}
+.form_table th span{ color:#e51d28; }
+.form_table td{
+	border-bottom: 1px solid #ddd; 
+	padding:10px; 
+	text-align:left; 
+}
+
+#idMsg { font-size:0.8em; }
+#fontBlue { font-weight:bold; color:blue; }
+#fontRed { font-weight:bold; color:Red; }
+
+.form_table input{
+	font-size: 1em;
+    color: #666;
+    border: 1px solid #d4d4d4;
+    background-color: #fff;
+    padding: 11px 5px;
+    box-sizing: border-box;
+}
+
+.submit_btn{
+	text-align: center;
+	width: 100%;
+	margin-top: 30px;
+}
+.submit_btn input{
+	display: inline-block;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: -0.3pt;
+    color: #fff;
+    border: 2px solid #0e9482;
+    padding: 0 30px;
+    width: 230px;
+    line-height: 76px;
+    box-sizing: border-box;
+    background: #0e9482;
+    text-align: center;
+    transition: all 0.3s ease-out;
+}
+.submit_btn input:hover{
+	background-color:#fff;  
+	color:#0e9482;
+}

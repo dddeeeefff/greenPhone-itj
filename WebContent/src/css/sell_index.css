@@ -1,0 +1,51 @@
+.page-contents { margin-left: 300px; text-align: center; }
+.page-contents > h2 { width: 500px; margin: 20px auto; font-size: 40px; }
+.contents { width: 52.5%; min-width: 1000px; margin: 0 auto; }
+.progress { width: 100%; border: 1px solid #000; }
+h3 { font-size: 35px; width: 250px; padding: 15px; }
+h4 { font-size: 24px; margin-bottom: 10%; position: relative; }
+.first > h4 { margin-left: 20%; width: 50%; }
+.first > h4::before {
+    content: '';
+    position: absolute;
+    background: url(../img/sell_register.jpg);
+    width: 100px;   height: 100px;
+    background-size: 100% auto;
+    transform: translateX(100%);
+}
+.second, .third { width: 80%; margin: 0 auto 60px; display: flex; justify-content: space-between; align-items: center; }
+.second > h4:nth-child(1):before {
+    content: '';
+    position: absolute;
+    background: url(../img/sell_done.jpg);
+    width: 130px;   height: 80px;
+    background-size: 100% auto;
+    transform: translateX(110%);
+}
+.second > h4:nth-child(2):before {
+    content: '';
+    position: absolute;
+    background: url(../img/sell_inspect.jpg);
+    width: 130px;   height: 140px;
+    background-size: 100% auto;
+    transform: translateX(-120%) translateY(-20%);
+}
+.third { width: 65%; }
+.third > h4:nth-child(1):before {
+    content: '';
+    position: absolute;
+    background: url(../img/sell_inspect.jpg);
+    width: 130px;   height: 140px;
+    background-size: 100% auto;
+    transform: translateX(100%) translateY(-10%);
+}
+.third > h4:nth-child(2):before {
+    content: '';
+    position: absolute;
+    background: url(../img/sell_ship.jpg);
+    width: 150px;   height: 110px;
+    background-size: 100% auto;
+    transform: translateX(-120%);
+}
+.contents > p { text-align: center; margin-top: 50px; }
+.contents > p > input { width: 200px; height: 70px; font-size: 20px; padding: 20px; }

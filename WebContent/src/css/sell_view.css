@@ -1,0 +1,178 @@
+.page-contents { 
+	margin-left: 300px; 
+	text-align: center; 
+}
+.content-wrapper { 
+	width: 1000px; 
+	margin: 0 auto; 
+}
+h3 {
+	width: 90%; 
+	border-bottom: 1px solid lightskyblue; 
+	padding-bottom: 10px; 
+	font-size: 30px; 
+}
+.content-info { 
+	width: 90%; 
+	margin: 50px auto 0; 
+}
+.steps { 
+	width: 100%; 
+	display: flex; 
+	justify-content: space-between; 
+	font-size: 17px; 
+}
+.step { width: 15%; }
+.step > figure { width: 100%; }
+.step > p { margin: 10px; }
+.steps .step .txt { margin: 10px 10px 0 -15px; }
+.active-txt { 
+	color: blue; 
+	font-weight: bold; 
+}
+.step-arrow { 
+	width: 5%; 
+	margin: 50px 20px 90px; 
+}
+.step-arrow > figure { width: 100%; }
+.info { 
+	width: 90%; 
+	margin: 10px auto 0; 
+	display: flex; 
+	justify-content: space-between; 
+	font-size: 20px; 
+}
+.imgs { 
+	width: 45%; 
+	margin: auto 0; 
+}
+.imgs .img-row { 
+	width: 90%; 
+	display: flex; 
+	flex-wrap: wrap; 
+	justify-content: space-between; 
+}
+.imgs .img-row:nth-child(2) { margin-top: 30px; }
+.img-row > figure { width: 45%; }
+.texts { width: 45%; }
+.text { 
+	width: 100%; 
+	display: flex; 
+	border-top: 1px solid lightskyblue; 
+	border-bottom: 1px solid lightskyblue; 
+}
+.key > p { 
+	padding: 10px; 
+	vertical-align: middle; 
+}
+.value { 
+	text-align: left; 
+	margin-left: 50px; 
+	border-left: 1px solid lightskyblue; 
+}
+.value > p { 
+	padding: 10px; 
+	padding-left: 30px; 
+	vertical-align: middle; 
+}
+.prices { 
+	padding: 20px 0; 
+	display: flex; 
+	justify-content: flex-end; 
+	border-bottom: 1px solid lightskyblue; 
+}
+.prices .price-left { 
+	margin-right: 10px; 
+	font-size: 20px; 
+}
+.prices .price-left > p { padding: 5px; }
+.prices .price-left > p:nth-child(2) { margin-top: 5px; }
+.prices .price-right > p { padding: 5px; font-size: 20px; }
+.prices .price-right > p:nth-child(2) { margin-top: 5px; }
+.btns { 
+	margin: 30px auto; 
+	width: 90%; 
+	display: none; 
+}
+.btns > input { 
+	padding: 10px 15px; 
+	font-size: 20px; 
+}
+.btns > input:nth-child(1) { margin-right: 20px; }
+.form { 
+	margin: 30px; 
+	width: 90%; 
+	display: none; 
+}
+.form > form { 
+	display: flex; 
+	width: 100%; 
+	justify-content: center; 
+}
+.form > form > p { 
+	padding: 10px 0; 
+	font-size: 20px; 
+}
+.form > form > input { 
+	margin-left: 10px;
+	padding: 10px 15px;	
+}
+.frm2 { margin: 0 30px; display: none; }
+.frm2 > form { 
+	display: flex; 
+	flex-wrap: wrap; 
+}
+.frm2 > form > p { 
+	width: 100%; 
+	font-size: 20px; 
+}
+.frm2 > form > .ctrl { 
+	width: 100%; 
+	font-size: 20px; 
+	margin-top: 10px; 
+}
+.frm2 > form > .ctrl > select { font-size: 20px; }
+.frm2 > form > .ctrl > input { font-size: 20px; }
+.print { 
+	margin: 30px auto 0; 
+	width: 90%; 
+	border: 1px solid lightskyblue; 
+	display: none; 
+}
+.multi, .multi2 { 
+	display: flex; 
+	justify-content: center; 
+	display: none; 
+}
+.multi { 
+	width: 90%; 
+	border: none; 
+}
+.multi > p { 
+	border: 1px solid lightskyblue; 
+	padding: 5px 10px; 
+}
+.multi2 { 
+	width: 200px; 
+	margin: 30px auto 0; 
+	border: 1px solid lightskyblue; 
+}
+.multi2 > p { padding: 5px 10px; }
+.multi > p:nth-child(1) { margin-right: 10px; }
+.mono { border: none; }
+.mono > p { 
+	width: 100px; 
+	margin: 0 auto; 
+	padding: 5px 10px; 
+	border: 1px solid lightskyblue; 
+}
+.reject { display: none; }
+.reject > p { 
+	width: 25%; 
+	margin: 30px auto 0; 
+	padding: 5px 10px; 
+	border: 1px solid lightskyblue; 
+	color: red;
+}
+.block { display: block; }
+.flex { display: flex; }

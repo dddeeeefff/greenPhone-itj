@@ -1,0 +1,27 @@
+
+
+.main {
+	font-size: 20px;
+}
+
+
+
+
+.table { width: 100%; display: table;}
+
+.row {display: table-row;background: #fff; }
+.row.header {font-weight:600;background:#d6f1ed}
+ 
+.cell { padding: 10px 12px; display: table-cell; vertical-align:middle;  text-align:Center;  border-bottom:1px solid #ddd; color:#666}
+.cell a {color:#333}
+
+.row.header .cell { color: #333; border-top:1px solid #0e9482;border-bottom:1px solid #0e9482}
+
+.tit  {width:60%; text-align:left; font-weight:600; line-height:1.3em;}
+
+
+.btn_area{text-align:center;margin-bottom: 20px;float:right;margin-top:20px}
+.btn_confirm{display:inline-block; cursor:pointer; font-size:17px; letter-spacing:-0.3pt; color:#fff; font-weight:700; border:2px solid #0e9482; padding:15px 40px; box-sizing:border-box; background:#0e9482; text-align:center; transition: all 0.3s ease-out}
+.btn_confirm:hover{background-color:#fff;  color:#0e9482}
+
+.nullRow { text-align: center; width: 100%; transform: translateX(30%); margin-top: 50px; }

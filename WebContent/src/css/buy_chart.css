@@ -1,0 +1,12 @@
+.page-contents { width: 70%; margin: 50px auto; min-width: 1000px; }
+.form-wrap { width: 50%; margin-left: 70%; }
+.form-wrap > form > input { font-size: 20px; padding: 10px 15px; }        
+.form-wrap > form > input[type=submit] { margin-left: 15px; padding: 8px 13px; }
+.chart { width: 100%; font-size: 20px; margin-top: -50px; }
+.chart > table { width: 80%; margin: 100px auto 0; }
+.chart > table tr > th, td { padding: 10px 15px; text-align: center; }
+.chart > table tr th { border-top: 2px solid #0e9482; background: #d6f1ed; }
+.chart > table tr td { border-bottom: 1px solid #f9f9f9; }
+.chart > table tr td:nth-child(1) { text-align: left; }
+.pagination { width: 60%; margin: 50px auto 0; display: flex; justify-content: space-between; font-size: 20px; }
+.pagination > a { display: block; }
