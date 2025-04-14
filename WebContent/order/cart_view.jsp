@@ -54,7 +54,7 @@ function cartUp(scidx, cnt) {
 // 장바구니 내 수량 변경
 	$.ajax({
 		type : "POST",
-		url : "/greenPhone/cart_proc_up",
+		url : "/cart_proc_up",
 		data : {"scidx" : scidx, "cnt" : cnt},
 		success : function(chkRs) {
 			if (chkRs == 0) {

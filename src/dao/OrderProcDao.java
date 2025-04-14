@@ -188,7 +188,9 @@ public class OrderProcDao {
 			System.out.println("OrderProcDao 클래스의 orderInsert() 메소드 오류");
 			e.printStackTrace();
 		}finally {
-			close(rs);	close(stmt);
+//			close(rs);	close(stmt);
+			if (rs != null) close(rs);
+			if (stmt != null) close(stmt);
 		}
 		
 		return siid + "," + rcount + "," + target;
