@@ -38,7 +38,7 @@ function cartDel(scidx) {
 		// cart_proc_del <-> CartProcDelCtrl
 		$.ajax({
 			type : "POST",
-			url : "/greenPhone/cart_proc_del",
+			url : "/cart_proc_del",
 			data : { "scidx" : scidx },
 			success : function(chkRs) {
 				if (chkRs == 0){
