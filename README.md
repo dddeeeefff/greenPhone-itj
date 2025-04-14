@@ -47,11 +47,7 @@ Java 기반 JSP/Servlet 환경에서 **쇼핑몰 사용자 구매 프로세스**
 
 ## 📊 데이터베이스 설계 (일부 테이블 예시)
 
-- `t_sell_info`: 주문 기본 정보
-- `t_sell_detail`: 주문 상세 항목
-- `t_sell_cart`: 장바구니
-- `t_member_info`, `t_member_point`: 사용자 포인트 및 내역
-- `t_product_info`, `t_product_option`: 상품 및 옵션/재고 정보
+![장바구니 담기 화면](img/green-erd.png)
 
 ---
 
