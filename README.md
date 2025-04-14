@@ -47,7 +47,7 @@ Java 기반 JSP/Servlet 환경에서 **쇼핑몰 사용자 구매 프로세스**
 
 ## 📊 데이터베이스 설계 (일부 테이블 예시)
 
-![장바구니 담기 화면](/img/green-erd.png)
+![장바구니 담기 화면](WebContent/img/green-erd.png)
 
 ---
 
