@@ -91,7 +91,99 @@ public class OrderProcDao {
 
 		return siid;
 	}
-	
+
+//	public String orderInsert(String kind, SellInfo si, String temp) {
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//		int rcount = 0, target = 0;
+//		// rcount : 실제 쿼리 실행결과로 정상적으로 적용되는 레코드 개수를 누적 저장할 변수
+//		// target : insert, update, delete 등의 쿼리 실행횟수로 적용되어야 할 레코드의 총 개수를 저장할 변수
+//		String siid = getSiid(si.getSi_id());
+//
+//		try {
+//			stmt = conn.createStatement();
+//
+//			// t_sell_info 테이블 insert
+//			String sql = "insert into t_sell_info(si_id, mi_id, si_name, si_phone, si_zip, si_addr1, si_addr2, " +
+//			"si_memo, si_payment, si_pay, si_upoint, si_spoint, si_invoice, si_status) values('" +
+//			siid + "', '" + si.getMi_id() +  "', '" + si.getSi_name() + "', '" + si.getSi_phone() + "', '" + si.getSi_zip() +
+//			"', '" + si.getSi_addr1() + "', '" + si.getSi_addr2() + "', '" + si.getSi_memo() + "', '" + si.getSi_payment() +
+//			"', '" + (si.getSi_pay() - si.getSi_upoint()) + "', '" + si.getSi_upoint() + "', '" + si.getSi_spoint() + "', '" + "" +
+//			"', '" + si.getSi_status() + "') ";
+//
+//			target++;	rcount = stmt.executeUpdate(sql);
+//
+//			if(kind.equals("c")) {
+//			// 장바구니를 통한 주문일 경우
+//				sql = "select a.pi_id, a.po_idx, a.sc_cnt, b.pi_name, b.pi_img1, b.pi_dc, ceil(((b.pi_min * (100 - b.pi_dc) / 100) * (1 + c.po_inc / 100)) * a.sc_cnt) price, c.po_name " +
+//					  " from t_sell_cart a, t_product_info b, t_product_option c " +
+//					  " where a.pi_id = b.pi_id and a.pi_id = c.pi_id and a.mi_id = '" + si.getMi_id() + "' and a.po_idx = c.po_idx and (";
+//				String delWhere = " where mi_id = '" + si.getMi_id() + "' and (";
+//				String[] arr = temp.split(",");
+//				// 장바구니 테이블의 인덱스번호들로 배열 생성
+//				for(int i = 0; i < arr.length; i++) {
+//					if(i == 0) {
+//						sql += "a.sc_idx = " + arr[i];
+//						delWhere += "sc_idx = " + arr[i];
+//					} else {
+//						sql += " or a.sc_idx = " + arr[i];
+//						delWhere += " or sc_idx = " + arr[i];
+//					}
+//				}
+//				sql += ")";
+//				delWhere += ")";
+//				rs = stmt.executeQuery(sql);
+//				if(rs.next()) {		// 장바구니에 구매할 상품정보가 있다면
+//					do {
+//						Statement stmt2 = conn.createStatement();
+//
+//						// t_sell_detail 테이블에 사용할 insert 문
+//						sql = "insert into t_sell_detail (si_id, pi_id, po_idx, sd_mname, sd_oname, sd_img, sd_cnt, sd_price, sd_dc) " +
+//						" values('" + siid + "', '" + rs.getString("pi_id") + "', '" + rs.getInt("po_idx") + "', '" +
+//						rs.getString("pi_name") + "', '" + rs.getString("po_name") + "', '" + rs.getString("pi_img1") + "', '" +
+//						rs.getInt("sc_cnt") + "', '" + (rs.getInt("price") / rs.getInt("sc_cnt") - si.getSi_upoint()) + "', '" + rs.getInt("pi_dc") + "') ";
+//						target++;		rcount += stmt2.executeUpdate(sql);
+//						System.out.println(sql);
+//
+//						// t_product_option 테이블의 판매 및 재고 변경 update 문
+//						sql = "update t_product_option set po_stock = po_stock - " + rs.getInt("sc_cnt") + " where po_idx = " + rs.getInt("po_idx");
+//						target++;	rcount += stmt2.executeUpdate(sql);
+//						System.out.println(sql);
+//					}while(rs.next());
+//
+//					// t_sell_cart 테이블의 구매 후 삭제 delete 문
+//					sql = "delete from t_sell_cart " + delWhere;
+//					stmt.executeUpdate(sql);
+//				}else {	// 장바구니에 구매할 상품정보가 없으면
+//					return siid + ",1,4";
+//				}
+//
+//			}else {	// 바로 구매일 경우
+//
+//			}
+//
+//			// t_member_info 사용 포인트 감소
+//			sql = "update t_member_info set mi_point = mi_point - " + si.getSi_upoint() + " where mi_id = '" + si.getMi_id() + "' ";
+//			target++;	rcount += stmt.executeUpdate(sql);
+//			if (si.getSi_upoint() > 0) {
+//			// t_member_point 테이블의 포인트 사용내역 추가 쿼리
+//				sql = "insert into t_member_point(mi_id, mp_su, mp_point, mp_desc, mp_detail) " +
+//					  " values('" + si.getMi_id() + "', 'u', '" +si.getSi_upoint() + "' , '포인트 사용', '" + siid + "') ";
+//				target++;	rcount += stmt.executeUpdate(sql);
+//			}
+//
+//		}catch(Exception e) {
+//			System.out.println("OrderProcDao 클래스의 orderInsert() 메소드 오류");
+//			e.printStackTrace();
+//		}finally {
+////			close(rs);	close(stmt);
+//			if (rs != null) close(rs);
+//			if (stmt != null) close(stmt);
+//		}
+//
+//		return siid + "," + rcount + "," + target;
+//	}
+
 	public String orderInsert(String kind, SellInfo si, String temp) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -104,20 +196,21 @@ public class OrderProcDao {
 			stmt = conn.createStatement();
 
 			// t_sell_info 테이블 insert
-			String sql = "insert into t_sell_info(si_id, mi_id, si_name, si_phone, si_zip, si_addr1, si_addr2, " + 
-			"si_memo, si_payment, si_pay, si_upoint, si_spoint, si_invoice, si_status) values('" + 
-			siid + "', '" + si.getMi_id() +  "', '" + si.getSi_name() + "', '" + si.getSi_phone() + "', '" + si.getSi_zip() + 
-			"', '" + si.getSi_addr1() + "', '" + si.getSi_addr2() + "', '" + si.getSi_memo() + "', '" + si.getSi_payment() + 
-			"', '" + (si.getSi_pay() - si.getSi_upoint()) + "', '" + si.getSi_upoint() + "', '" + si.getSi_spoint() + "', '" + "" + 
-			"', '" + si.getSi_status() + "') ";
-			
-			target++;	rcount = stmt.executeUpdate(sql);
-			
+			String sql = "insert into t_sell_info(si_id, mi_id, si_name, si_phone, si_zip, si_addr1, si_addr2, " +
+					"si_memo, si_payment, si_pay, si_upoint, si_spoint, si_invoice, si_status) values('" +
+					siid + "', '" + si.getMi_id() +  "', '" + si.getSi_name() + "', '" + si.getSi_phone() + "', '" + si.getSi_zip() +
+					"', '" + si.getSi_addr1() + "', '" + si.getSi_addr2() + "', '" + si.getSi_memo() + "', '" + si.getSi_payment() +
+					"', '" + (si.getSi_pay() - si.getSi_upoint()) + "', '" + si.getSi_upoint() + "', '" + si.getSi_spoint() + "', '" + "" +
+					"', '" + si.getSi_status() + "') ";
+
+			target++;
+			rcount = stmt.executeUpdate(sql);
+
 			if(kind.equals("c")) {
-			// 장바구니를 통한 주문일 경우
-				sql = "select a.pi_id, a.po_idx, a.sc_cnt, b.pi_name, b.pi_img1, b.pi_dc, ceil(((b.pi_min * (100 - b.pi_dc) / 100) * (1 + c.po_inc / 100)) * a.sc_cnt) price, c.po_name " + 
-					  " from t_sell_cart a, t_product_info b, t_product_option c " +
-					  " where a.pi_id = b.pi_id and a.pi_id = c.pi_id and a.mi_id = '" + si.getMi_id() + "' and a.po_idx = c.po_idx and (";
+				// 장바구니를 통한 주문일 경우
+				sql = "select a.pi_id, a.po_idx, a.sc_cnt, b.pi_name, b.pi_img1, b.pi_dc, ceil(((b.pi_min * (100 - b.pi_dc) / 100) * (1 + c.po_inc / 100)) * a.sc_cnt) price, c.po_name " +
+						" from t_sell_cart a, t_product_info b, t_product_option c " +
+						" where a.pi_id = b.pi_id and a.pi_id = c.pi_id and a.mi_id = '" + si.getMi_id() + "' and a.po_idx = c.po_idx and (";
 				String delWhere = " where mi_id = '" + si.getMi_id() + "' and (";
 				String[] arr = temp.split(",");
 				// 장바구니 테이블의 인덱스번호들로 배열 생성
@@ -133,70 +226,85 @@ public class OrderProcDao {
 				sql += ")";
 				delWhere += ")";
 				rs = stmt.executeQuery(sql);
-				if(rs.next()) {		// 장바구니에 구매할 상품정보가 있다면
+				if(rs.next()) { // 장바구니에 구매할 상품정보가 있다면
 					do {
 						Statement stmt2 = conn.createStatement();
 
 						// t_sell_detail 테이블에 사용할 insert 문
 						sql = "insert into t_sell_detail (si_id, pi_id, po_idx, sd_mname, sd_oname, sd_img, sd_cnt, sd_price, sd_dc) " +
-						" values('" + siid + "', '" + rs.getString("pi_id") + "', '" + rs.getInt("po_idx") + "', '" + 
-						rs.getString("pi_name") + "', '" + rs.getString("po_name") + "', '" + rs.getString("pi_img1") + "', '" + 
-						rs.getInt("sc_cnt") + "', '" + (rs.getInt("price") / rs.getInt("sc_cnt") - si.getSi_upoint()) + "', '" + rs.getInt("pi_dc") + "') ";
-						target++;		rcount += stmt2.executeUpdate(sql);
+								" values('" + siid + "', '" + rs.getString("pi_id") + "', '" + rs.getInt("po_idx") + "', '" +
+								rs.getString("pi_name") + "', '" + rs.getString("po_name") + "', '" + rs.getString("pi_img1") + "', '" +
+								rs.getInt("sc_cnt") + "', '" + (rs.getInt("price") / rs.getInt("sc_cnt") - si.getSi_upoint()) + "', '" + rs.getInt("pi_dc") + "') ";
+						target++;
+						rcount += stmt2.executeUpdate(sql);
 						System.out.println(sql);
-						
+
 						// t_product_option 테이블의 판매 및 재고 변경 update 문
 						sql = "update t_product_option set po_stock = po_stock - " + rs.getInt("sc_cnt") + " where po_idx = " + rs.getInt("po_idx");
-						target++;	rcount += stmt2.executeUpdate(sql);	
+						target++;
+						rcount += stmt2.executeUpdate(sql);
 						System.out.println(sql);
 					}while(rs.next());
-					
+
 					// t_sell_cart 테이블의 구매 후 삭제 delete 문
 					sql = "delete from t_sell_cart " + delWhere;
 					stmt.executeUpdate(sql);
-				}else {	// 장바구니에 구매할 상품정보가 없으면
+				}else {
 					return siid + ",1,4";
 				}
-				
-			}else {	// 바로 구매일 경우
-				
+
+			}else if(kind.equals("d")) {
+				// 바로구매일 경우
+				String[] arr = temp.split(",");
+				if (arr.length < 3) {
+					throw new IllegalArgumentException("바로구매 요청의 temp 값 형식이 올바르지 않습니다. 예: pi123,1,2");
+				}
+				String pi_id = arr[0];
+				String po_idx = arr[1];
+				String sc_cnt = arr[2];
+
+				sql = "select b.pi_name, b.pi_img1, b.pi_dc, ceil(((b.pi_min * (100 - b.pi_dc) / 100) * (1 + c.po_inc / 100)) * " + sc_cnt + ") price, c.po_name "
+						+ " from t_product_info b, t_product_option c "
+						+ " where b.pi_id = c.pi_id and b.pi_id = '" + pi_id + "' and c.po_idx = '" + po_idx + "'";
+
+				rs = stmt.executeQuery(sql);
+				if (rs.next()) {
+					Statement stmt2 = conn.createStatement();
+
+					sql = "insert into t_sell_detail (si_id, pi_id, po_idx, sd_mname, sd_oname, sd_img, sd_cnt, sd_price, sd_dc) "
+							+ " values('" + siid + "', '" + pi_id + "', '" + po_idx + "', '" + rs.getString("pi_name") + "', '" + rs.getString("po_name") + "', '" + rs.getString("pi_img1") + "', '" + sc_cnt + "', '" + (rs.getInt("price") / Integer.parseInt(sc_cnt) - si.getSi_upoint()) + "', '" + rs.getInt("pi_dc") + "') ";
+					target++; rcount += stmt2.executeUpdate(sql);
+
+					sql = "update t_product_option set po_stock = po_stock - " + sc_cnt + " where po_idx = " + po_idx;
+					target++; rcount += stmt2.executeUpdate(sql);
+				}
 			}
-			
+
 			// t_member_info 사용 포인트 감소
 			sql = "update t_member_info set mi_point = mi_point - " + si.getSi_upoint() + " where mi_id = '" + si.getMi_id() + "' ";
-			target++;	rcount += stmt.executeUpdate(sql);
+			target++;
+			rcount += stmt.executeUpdate(sql);
 			if (si.getSi_upoint() > 0) {
-			// t_member_point 테이블의 포인트 사용내역 추가 쿼리
-				sql = "insert into t_member_point(mi_id, mp_su, mp_point, mp_desc, mp_detail) " + 
-					  " values('" + si.getMi_id() + "', 'u', '" +si.getSi_upoint() + "' , '포인트 사용', '" + siid + "') ";
-				target++;	rcount += stmt.executeUpdate(sql);	
+				// t_member_point 테이블의 포인트 사용내역 추가 쿼리
+				sql = "insert into t_member_point(mi_id, mp_su, mp_point, mp_desc, mp_detail) " +
+						" values('" + si.getMi_id() + "', 'u', '" +si.getSi_upoint() + "' , '포인트 사용', '" + siid + "') ";
+				target++;
+				rcount += stmt.executeUpdate(sql);
 			}
-			/*
-			if(!si.getSi_status().equals("a")) {
-				// t_member_info 포인트 적립 추가
-				int pnt = (si.getSi_pay() - si.getSi_upoint()) / 100;
-				sql = "update t_member_info set mi_point = mi_point + " + pnt + " where mi_id = '" + si.getMi_id() + "' ";
-				target++;	rcount += stmt.executeUpdate(sql);
-				
-				// t_member_point 테이블의 포인트 적립내역 추가 쿼리
-				sql = "insert into t_member_point(mi_id, mp_su, mp_point, mp_desc, mp_detail) " + 
-					  " values('" + si.getMi_id() + "', 's', '" + pnt + "' , '상품구매 적립', '" + siid + "') ";
-				target++;	rcount += stmt.executeUpdate(sql);
-			}
-			*/
+
 		}catch(Exception e) {
 			System.out.println("OrderProcDao 클래스의 orderInsert() 메소드 오류");
 			e.printStackTrace();
 		}finally {
-//			close(rs);	close(stmt);
 			if (rs != null) close(rs);
 			if (stmt != null) close(stmt);
 		}
-		
+
 		return siid + "," + rcount + "," + target;
 	}
-	
-	
+
+
+
 	public SellInfo getSellInfo(String siid) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -340,68 +448,6 @@ public class OrderProcDao {
 		
 		return result;
 	}
-	
-/*
-	public ArrayList<OrderInfo> getOrderList(String miid, int cpage, int psize) {
-		ArrayList<OrderInfo> orderInfoList = new ArrayList<OrderInfo>();
-		Statement stmt = null;
-		ResultSet rs = null;
-		Statement stmt2 = null;
-		ResultSet rs2 = null;
-		Statement stmt3 = null;
-		ResultSet rs3 = null;
-		OrderInfo orderInfo = null;
-		
-		try {
-			String sql = "select * from t_sell_info where mi_id = '" + miid + "'";
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				String siid = rs.getString("si_id");
-				sql = "select min(sd_idx) min from t_sell_detail " +
-					" where si_id = '" + siid +"'";
-				stmt2 = conn.createStatement();
-				rs2 = stmt2.executeQuery(sql);
-				rs2.next();
-				sql = "select '구매', a.si_id oi_id, b.sd_mname oi_name, " +
-					" a.si_pay oi_pay, a.si_status oi_status, a.si_date oi_date " +
-					" from t_sell_info a, t_sell_detail b " +
-					" where a.si_id = b.si_id and sd_idx = " + rs2.getString("min") +
-					" union " +
-					" select '판매', a.bi_id, b.pi_name, a.bi_pay, a.bi_status, " +
-					" a.bi_date from t_buy_info a, t_product_info b " +
-					" where a.pi_id = b.pi_id order by oi_date desc";
-				stmt3 = conn.createStatement();
-				rs3 = stmt3.executeQuery(sql);
-				while (rs3.next()) {
-					orderInfo = new OrderInfo();
-					orderInfo.setMi_id(miid);
-					orderInfo.setOi_minIdx(rs2.getInt("min"));
-					orderInfo.setOi_kind(rs3.getString("구매"));
-					orderInfo.setOi_id(rs3.getString("oi_id"));
-					orderInfo.setOi_name(rs3.getString("oi_name"));
-					int cnt = getBuyModelCount(siid);
-					if (cnt > 0)	orderInfo.setOi_name(orderInfo.getOi_name() + "외 " + cnt + "개");
-					System.out.println(orderInfo.getOi_name());
-					orderInfo.setOi_pay(rs3.getInt("oi_pay"));
-					orderInfo.setOi_status(rs3.getString("oi_status"));
-					orderInfo.setOi_date(rs3.getString("oi_date"));
-					orderInfoList.add(orderInfo);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("OrderProcDao 클래스의 getOrderList() 메소드 오류");
-			e.printStackTrace();
-		} finally {
-			close(stmt);	close(rs);
-			close(stmt2);	close(rs2);
-			close(stmt3);	close(rs3);
-		}
-		
-		return orderInfoList;
-	}
-
-*/
 	
 	public ArrayList<OrderInfo> getOrderList(String miid, int cpage, int psize) {
 		Statement stmt = null;

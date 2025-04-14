@@ -4,20 +4,20 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
-import java.util.*;
 import svc.*;
 import vo.*;
 
 @WebServlet("/order_proc_in")
 public class OrderProcInCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public OrderProcInCtrl() { super(); }
+
+	public OrderProcInCtrl() { super(); }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
-		
+		MemberInfo loginInfo = (MemberInfo) session.getAttribute("loginInfo");
+
 		if (loginInfo == null) {
 			response.setContentType("text/html; charset=utf-8;");
 			PrintWriter out = response.getWriter();
@@ -26,18 +26,13 @@ public class OrderProcInCtrl extends HttpServlet {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
+			return;
 		}
-		
+
 		String miid = loginInfo.getMi_id();
 		String kind = request.getParameter("kind");
 		int total = Integer.parseInt(request.getParameter("total"));
-		String scidxs = request.getParameter("scidxs");
-		
-		
-		
-		
-		
-		
+
 		// 결제정보
 		String siid = request.getParameter("siid");
 		String siname = loginInfo.getMi_name();
@@ -53,7 +48,7 @@ public class OrderProcInCtrl extends HttpServlet {
 		int sispoint = Integer.parseInt(request.getParameter("sPoint"));
 		String siinvoice = request.getParameter("si_invoice");
 		String sistatus = request.getParameter("si_status");
-		
+
 		SellInfo si = new SellInfo();
 		si.setSi_id(siid);			si.setMi_id(miid);
 		si.setSi_name(siname);
@@ -63,20 +58,42 @@ public class OrderProcInCtrl extends HttpServlet {
 		si.setSi_pay(total);		si.setSi_upoint(siupoint);
 		si.setSi_spoint(sispoint); 	si.setSi_invoice(siinvoice);
 		si.setSi_status(sipayment.equals("c") ? "a" : "b");
-		
-		String result = null, temp = "";
-		OrderProcInSvc orderProcInSvc = new OrderProcInSvc();
-		if (kind.equals("c")) {	// 장바구니를 통한 구매일 경우
+
+		String result = null;
+		String temp = "";
+
+		if (kind.equals("c")) {
+			// 장바구니 구매일 경우
 			temp = request.getParameter("scidxs");
-			// 장바구니에서 구매할 상품들의 인덱스번호들(쉼표로 구분)
-		} else {	// 바로 구매일 경우
-			
+
+		} else {
+			// 바로구매일 경우
+			String piid = request.getParameter("pi_id");
+			String poidx = request.getParameter("po_idx");
+			String cnt = request.getParameter("cnt");
+
+			if (piid == null || poidx == null || cnt == null ||
+					piid.isEmpty() || poidx.isEmpty() || cnt.isEmpty()) {
+				response.setContentType("text/html; charset=utf-8;");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('바로구매 정보가 올바르지 않습니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
+				return;
+			}
+
+			temp = piid + "," + poidx + "," + cnt;
 		}
+
+		OrderProcInSvc orderProcInSvc = new OrderProcInSvc();
 		result = orderProcInSvc.orderInsert(kind, si, temp);
 		String[] arr = result.split(",");
-		if (arr[1].equals(arr[2])) {	// 정상적으로 구매가 이루어졌으면
+
+		if (arr[1].equals(arr[2])) {
 			response.sendRedirect("order_end?siid=" + arr[0]);
-		} else {	// 정상적으로 구매가 이루어지지 않았으면
+		} else {
 			response.setContentType("text/html; charset=utf-8;");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -85,7 +102,5 @@ public class OrderProcInCtrl extends HttpServlet {
 			out.println("</script>");
 			out.close();
 		}
-		
 	}
-
 }

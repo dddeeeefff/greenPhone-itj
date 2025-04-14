@@ -1,6 +1,7 @@
 <%@page import="java.lang.reflect.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <%@page import="java.text.DecimalFormat"%>
 <%@ include file="../_inc/inc_head.jsp" %>
 <%
@@ -53,11 +54,11 @@ $(document).ready(function(){
 	var initUsePoint = 0;
 	var initTotalPrice = parseInt(document.getElementById("total_price").innerHTML);
 	var initGetPoint = initTotalPrice / 100;
-	
+
 	$("#uPoint").val(initUsePoint);
 	$("#totalPrice").val(initTotalPrice);
 	$("#sPoint").val(initGetPoint);
-	
+
 })
 
 
@@ -80,27 +81,27 @@ function usePoint() {
 	$("#total_point").text(use);
 	$("#result_price").text(total_price - use);
 	$("#get_point").text((total_price - use)/100);
-	
+
 	$("#uPoint").val(use);
 	$("#totalPrice").val(total_price + use);
 	$("#sPoint").val((total_price - use)/100);
-	
+
 }
 
 function useAll() {
 	var all = parseInt($("#cpoint").text());	// 보유 포인트
 	var currentPrice = $("#currentPrice").val();	// 주문 가격
 	if(currentPrice <= all){	// 보유 포인트가 주문가격 이상일 경우
-		document.frmOrder.use_pnt.value = currentPrice;	// 주문 가격 만큼의 포인트 사용 
+		document.frmOrder.use_pnt.value = currentPrice;	// 주문 가격 만큼의 포인트 사용
 	}else{
 		document.frmOrder.use_pnt.value = all;	// 보유 포인트 모두 사용
 	}
-	
+
 }
 
 
 
-$(function(){	
+$(function(){
 	$(document).on("change", "select[name=memoBox]", function(){
 		var value = $(this).find("option:selected").val();
 		var flag = true;
@@ -109,8 +110,8 @@ $(function(){
 			$("#simemo").text('');
 			$("#simemo").attr("disabled", flag);
 			value = $("#simemo").val();
-		}	
-		
+		}
+
 	});
 })
 
@@ -128,16 +129,16 @@ function isCheck(){
 		alert("결제수단를 선택하세요.");
 		event.preventDefault();
 	}
-	
-		
+
+
 	var memoBox = document.frmOrder.memoBox.value;
 	if (memoBox == "") {
 		alert("배송메모를 선택하세요.");
 		event.preventDefault();
 		return;
-		
+
 	}
-	
+
 }
 </script>
 <br /><br /><br />
@@ -149,12 +150,19 @@ int total = 0;		// 총 구매 가격의 누적치 저장 변수
 String scidxs = "";	// 장바구니 인덱스 번호들을 저장할 변수
 String siid = ((SellCart)cartList.get(0)).getPi_id().charAt(0) + "s";
 
+String kind = request.getParameter("kind");
+String temp = "";
+if ("d".equals(kind)) {
+	SellCart sc = cartList.get(0);  // 바로구매는 무조건 1개
+	temp = sc.getPi_id() + "," + sc.getPo_idx() + "," + sc.getSc_cnt();
+}
+
 for (int i = 0; i < cartList.size(); i++) {
 	SellCart sc = cartList.get(i);
 	scidxs += "," + sc.getSc_idx();
 	/*int realPrice = sc.getPi_min() * sc.getSc_cnt();
 	if (sc.getPi_dc() > 0)
-		realPrice = sc.getPi_min() * (100 - sc.getPi_dc()) / 100 * sc.getSc_cnt();	
+		realPrice = sc.getPi_min() * (100 - sc.getPi_dc()) / 100 * sc.getSc_cnt();
 	*/
 	int realPrice = sc.getPi_min();
 %>
@@ -174,9 +182,16 @@ scidxs = (scidxs.indexOf(',') >= 0) ? scidxs.substring(1) : scidxs;
 %>
 </table>
 <form name="frmOrder" action="order_proc_in" method="post">
+
+	<% if ("d".equals(kind)) { SellCart sc = cartList.get(0); %>
+	<input type="hidden" name="pi_id" value="<%= sc.getPi_id() %>" />
+	<input type="hidden" name="po_idx" value="<%= sc.getPo_idx() %>" />
+	<input type="hidden" name="cnt" value="<%= sc.getSc_cnt() %>" />
+	<% } %>
+
 <input type="hidden" name="total" value="<%=total %>" />
 <input type="hidden" name="kind" value="<%=request.getParameter("kind") %>" />		<!-- 장바구니 or 바로구매 구분자 -->
-<input type="hidden" name="scidxs" value="<%=scidxs %>" />
+<input type="hidden" name="scidxs" value="<%= "c".equals(kind) ? scidxs : temp %>" />
 
 <input type="hidden" name="uPoint" id="uPoint" value="" />	<!-- 사용포인트 -->
 <input type="hidden" name="totalPrice" id="totalPrice" value="" /> <!-- 결제금액 -->
