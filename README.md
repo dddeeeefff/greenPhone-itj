@@ -69,6 +69,16 @@ Java 기반 JSP/Servlet 환경에서 **쇼핑몰 사용자 구매 프로세스**
 ## 📷 시연 화면
 - 상품 선택 후 장바구니 담기 및 이동
 ![CART](WebContent/gif/cart-insert.gif)
+
+- 장바구니 상품 제거
+![CART-REMOVE](WebContent/gif/cart-remove.gif)
+
+- 장바구니 내 선택된 상품 제거
+![CART-REMOVE-checked](WebContent/gif/cart-remove-checked.gif)
+
+- 주문
+![ORDER](WebContent/gif/order.gif)
+
 ---
 
 ## 🧑‍💻 담당 역할 요약
